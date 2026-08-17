@@ -21,13 +21,9 @@
     </script>
     <style>
         ::selection { background: #D2B48C; color: #1c1917; }
-        html { scroll-behavior: smooth; }
-        .hero-gradient {
-            background: linear-gradient(135deg, #1c1917 0%, #292524 50%, #1c1917 100%);
-        }
+        .hero-gradient { background: linear-gradient(135deg, #1c1917 0%, #292524 50%, #1c1917 100%); }
         .card-shadow { box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); }
         .card-shadow-hover { box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05); }
-        .skill-bar { transition: width 1.5s ease-in-out; }
         .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
         .timeline-line { position: relative; }
@@ -41,18 +37,8 @@
             background: #e7e5e4;
         }
         .timeline-line:last-child::before { display: none; }
-        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-        .float-anim { animation: float 3s ease-in-out infinite; }
-        @keyframes typewriter { from{width:0} to{width:100%} }
-        @keyframes blink { 50%{border-color:transparent} }
-        .typewriter {
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 3px solid #D2B48C;
-            animation: typewriter 3s steps(30) 1s forwards, blink 0.7s step-end infinite;
-            width: 0;
-        }
-        .project-card:hover .project-img { transform: scale(1.05); }
+        @keyframes floatAnim { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+        .float-anim { animation: floatAnim 3s ease-in-out infinite; }
         .nav-link { position: relative; }
         .nav-link::after {
             content: '';
@@ -65,12 +51,15 @@
             transition: width 0.3s ease;
         }
         .nav-link:hover::after { width: 100%; }
+        .nav-link.active-link { color: #1c1917; }
+        .nav-link.active-link::after { width: 100%; }
+        .project-card:hover .project-img { transform: scale(1.05); }
     </style>
 </head>
 <body class="bg-[#fafaf9] font-sans text-stone-900 antialiased">
 
     <!-- Navigation -->
-    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-stone-200/60">
+    <nav id="navbar" class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-stone-200/60 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
             <a href="#hero" class="font-serif text-xl font-semibold tracking-tight text-stone-900">Laxmi<span class="text-[#D2B48C]">.</span></a>
             <div class="hidden md:flex items-center gap-8">
@@ -78,7 +67,7 @@
                 <a href="#education" class="nav-link text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">Education</a>
                 <a href="#skills" class="nav-link text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">Skills</a>
                 <a href="#projects" class="nav-link text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">Projects</a>
-                <a href="#internship" class="nav-link text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">Internhip</a>
+                <a href="#internship" class="nav-link text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">Internship</a>
                 <a href="#contact" class="nav-link text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">Contact</a>
             </div>
             <a href="#contact" class="hidden md:inline-flex items-center gap-2 bg-stone-900 text-white text-sm font-medium px-5 py-2.5 rounded-lg hover:bg-stone-800 transition-colors">
@@ -88,20 +77,19 @@
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-stone-200?100 px-6 py-4 space-y-3">
-            <a href="#about" class="block text-sm font-medium text-stone-600 hover:text-stone-900">About</a>
-            <a& href="#education" class="block text-sm font-medium text-stone-600 hover:text-stone-900">Education</a>
-            <a href="#skills" class="block text-sm font-medium text-stone-600 hover:text-stone-900">Skills</a>
-            <a href="#projects" class="block text-sm font-medium text-stone-600 hover:text-stone-900">Projects</a>
-            <a href="#internship" class="block text-sm font-medium text-stone-600 hover:text-stone-900">Internship</a>
-            <a href="#contact" class="block text-sm font-medium text-stone-600 hover:text-stone-900">Contact</a>
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-stone-100 px-6 py-4 space-y-3">
+            <a href="#about" class="block text-sm font-medium text-stone-600 hover:text-stone-900 py-1">About</a>
+            <a href="#education" class="block text-sm font-medium text-stone-600 hover:text-stone-900 py-1">Education</a>
+            <a href="#skills" class="block text-sm font-medium text-stone-600 hover:text-stone-900 py-1">Skills</a>
+            <a href="#projects" class="block text-sm font-medium text-stone-600 hover:text-stone-900 py-1">Projects</a>
+            <a href="#internship" class="block text-sm font-medium text-stone-600 hover:text-stone-900 py-1">Internship</a>
+            <a href="#contact" class="block text-sm font-medium text-stone-600 hover:text-stone-900 py-1">Contact</a>
             <a href="#contact" class="inline-flex items-center gap-2 bg-stone-900 text-white text-sm font-medium px-5 py-2.5 rounded-lg mt-2">Hire Me</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id$="hero" class="hero-gradient min-h-screen flex items-center relative overflow-hidden">
+    <!-- Hero -->
+    <section id="hero" class="hero-gradient min-h-screen flex items-center relative overflow-hidden">
         <div class="absolute inset-0 opacity-5">
             <div class="absolute top-20 left-20 w-72 h-72 bg-[#D2B48C] rounded-full blur-3xl"></div>
             <div class="absolute bottom-20 right-20 w-96 h-96 bg-[#D2B48C] rounded-full blur-3xl"></div>
@@ -111,14 +99,14 @@
                 <div class="text-white space-y-8">
                     <div class="space-y-4">
                         <p class="text-[#D2B48C] text-sm font-medium tracking-widest uppercase">Welcome to my Portfolio</p>
-                        <h1 class="text-5xl md:text-7xl font-serif font/ormal tracking-tight leading-[1.1]">
+                        <h1 class="text-5xl md:text-7xl font-serif font-normal tracking-tight leading-[1.1]">
                             Hi, I'm<br>
                             <span class="text-[#D2B48C]">Laxmi</span> Kumari<br>
                             Rajak
                         </h1>
                         <div class="flex items-center gap-3 text-lg text-stone-300">
                             <span class="w-8 h-[2px] bg-[#D2B48C]"></span>
-                            <span id="typedText" class="font-light">MCA Student & Aspiring Data Scientist</span>
+                            <span id="typedText" class="font-light">MCA Student</span>
                         </div>
                     </div>
                     <p class="text-stone-400 text-lg font-light leading-relaxed max-w-lg">
@@ -133,18 +121,10 @@
                         </a>
                     </div>
                     <div class="flex items-center gap-6 pt-4">
-                        <a$0 href="mailto:laxmikumarirajak402@gmail.com" class="text-stone-400 hover:text-[#D2B48C] transition-colors">
-                            <i data-lucide="mail" class="w-5 h-5"></i>
-                        </a>
-                        <a href="tel:+'9263955418" class="text-stone-400 hover:text-[#D2B48C] transition-colors">
-                            <i data-lucide="phone" class="w-5 h-5"></i>
-                        </a>
-                        <a href="#" class="text-stone-400 hover:text-[#D2B48C] transition-colors">
-                            <i data-lucide="github" class="w-5 h-5"></i>
-                        </a>
-                        <a href="#" class="text-stone-400 hover:text-[#D2B48C] transition-color9">
-                            <i data-lucide="linkedin" class="w-5 h-5"></i>
-                        </a>
+                        <a href="mailto:laxmikumarirajak402@gmail.com" class="text-stone-400 hover:text-[#D2B48C] transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                        <a href="tel:+919263955418" class="text-stone-400 hover:text-[#D2B48C] transition-colors"><i data-lucide="phone" class="w-5 h-5"></i></a>
+                        <a href="#" class="text-stone-400 hover:text-[#D2B48C] transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                        <a href="#" class="text-stone-400 hover:text-[#D2B48C] transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
                     </div>
                 </div>
                 <div class="relative flex justify-center lg:justify-end">
@@ -152,9 +132,7 @@
                         <div class="w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden border-4 border-[#D2B48C]/30 float-anim">
                             <img src="https://picsum.photos/seed/laxmi-portrait/400/400.jpg" alt="Laxmi Kumari Rajak" class="w-full h-full object-cover">
                         </div>
-                        <div class="absolute -bottom-4 -right-4 bg-[#D2B48C] text-stone-900 px-6 py-3 rounded-xl font-semibold text-sm shadow-xl">
-                            MCA Student+Student
-                        </div>
+                        <div class="absolute -bottom-4 -right-4 bg-[#D2B48C] text-stone-900 px-6 py-3 rounded-xl font-semibold text-sm shadow-xl">MCA Student</div>
                         <div class="absolute -top-4 -left-4 bg-white/10 backdrop-blur-sm text-white px-4 py-2 rounded-xl text-xs font-medium border border-white/20">
                             <i data-lucide="map-pin" class="w-3 h-3 inline mr-1"></i> Ranchi, Jharkhand
                         </div>
@@ -162,12 +140,12 @@
                 </div>
             </div>
         </div>
-        <div classE="absolute bottom-8 left-1/2 -translate-x-1/2 text-stone-400 animate-bounce">
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-stone-400 animate-bounce">
             <i data-lucide="chevron-down" class="w-6 h-6"></i>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About -->
     <section id="about" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
@@ -184,7 +162,7 @@
                         My goal is to secure a challenging role in a prestigious firm, enabling me to make meaningful contributions while continuously learning and enhancing my skills, fostering substantial professional growth.
                     </p>
                     <p class="text-stone-500 font-light leading-relaxed">
-                        I'm currently pursuing my Master of Computer Applications (MCA) at Sarala Birla University. With a background in Zoology (BSc) and hands-on experience in Data Science with Python, I bring a unique interdisciplinary perspective to problem-solving.
+                        I am currently pursuing my Master of Computer Applications (MCA) at Sarala Birla University. With a background in Zoology (BSc) and hands-on experience in Data Science with Python, I bring a unique interdisciplinary perspective to problem-solving.
                     </p>
                     <div class="grid grid-cols-2 gap-6 pt-4">
                         <div class="space-y-1">
@@ -209,14 +187,15 @@
         </div>
     </section>
 
-    <!-- Education Section -->
+    <!-- Education -->
     <section id="education" class="py-24 bg-[#fafaf9]">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
                 <p class="text-[#b45309] text-sm font-medium tracking-widest uppercase">Academic Journey</p>
                 <h2 class="text-4xl font-serif tracking-tight mt-3">Education <span class="text-[#D2B48C]">Qualification</span></h2>
             </div>
-            <div class="space-y-0">
+            <div class="max-w-3xl mx-auto">
+
                 <!-- MCA -->
                 <div class="timeline-line relative pl-12 pb-12 fade-in">
                     <div class="absolute left-0 top-0 w-8 h-8 bg-[#D2B48C] rounded-full flex items-center justify-center text-white z-10">
@@ -230,15 +209,16 @@
                             </div>
                             <span class="bg-[#D2B48C]/10 text-[#b45309] text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider">Current</span>
                         </div>
-                        <p class="text-stone-500 text-sm mb-3">2nd Year • 3rd Semester • Expected 2027</p>
+                        <p class="text-stone-500 text-sm mb-3">2nd Year &bull; 3rd Semester &bull; Expected 2027</p>
                         <div class="flex items-center gap-3">
                             <div class="flex-1 bg-stone-100 rounded-full h-2.5">
-                                <div class="bg-[#D2B48C] h-2.5 rounded-full skill-bar" style="width: 74%"></div>
+                                <div class="bg-[#D2B48C] h-2.5 rounded-full" style="width:74%"></div>
                             </div>
                             <span class="text-sm font-semibold text-stone-700">7.39 SGPA</span>
                         </div>
                     </div>
                 </div>
+
                 <!-- BSc -->
                 <div class="timeline-line relative pl-12 pb-12 fade-in">
                     <div class="absolute left-0 top-0 w-8 h-8 bg-stone-300 rounded-full flex items-center justify-center text-stone-600 z-10">
@@ -255,12 +235,13 @@
                         <p class="text-stone-500 text-sm mb-3">2024</p>
                         <div class="flex items-center gap-3">
                             <div class="flex-1 bg-stone-100 rounded-full h-2.5">
-                                <div class="bg-green-500 h-2.5 rounded-full skill-bar" style="width: 70.22%"></div>
+                                <div class="bg-green-500 h-2.5 rounded-full" style="width:70%"></div>
                             </div>
                             <span class="text-sm font-semibold text-stone-700">70.22%</span>
                         </div>
                     </div>
                 </div>
+
                 <!-- 12th -->
                 <div class="timeline-line relative pl-12 pb-12 fade-in">
                     <div class="absolute left-0 top-0 w-8 h-8 bg-stone-300 rounded-full flex items-center justify-center text-stone-600 z-10">
@@ -276,12 +257,13 @@
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="flex-1 bg-stone-100 rounded-full h-2.5">
-                                <div class="bg-stone-400 h-2.5 rounded-full skill-bar" style="width: 54.4%"></div>
+                                <div class="bg-stone-400 h-2.5 rounded-full" style="width:54%"></div>
                             </div>
                             <span class="text-sm font-semibold text-stone-700">54.4%</span>
                         </div>
                     </div>
                 </div>
+
                 <!-- 10th -->
                 <div class="relative pl-12 fade-in">
                     <div class="absolute left-0 top-0 w-8 h-8 bg-stone-300 rounded-full flex items-center justify-center text-stone-600 z-10">
@@ -297,28 +279,27 @@
                         </div>
                         <div class="flex items-center gap-3">
                             <div class="flex-1 bg-stone-100 rounded-full h-2.5">
-                                <div class="bg-stone-400 h-2.5 rounded-full skill-bar" style="width: 73.2%"></div>
+                                <div class="bg-stone-400 h-2.5 rounded-full" style="width:73%"></div>
                             </div>
                             <span class="text-sm font-semibold text-stone-700">73.20%</span>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Skills -->
     <section id="skills" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
                 <p class="text-[#b45309] text-sm font-medium tracking-widest uppercase">What I Know</p>
                 <h2 class="text-4xl font-serif tracking-tight mt-3">Skills & <span class="text-[#D2B48C]">Technologies</span></h2>
-                <p class="text-stone-500 mt-4 max-w-2xl mx-auto font-light">Skills acquired through MCA coursework, internships, and self-learning — continuously expanding.</p>
+                <p class="text-stone-500 mt-4 max-w-2xl mx-auto font-light">Skills acquired through MCA coursework, internships, and self-learning.</p>
             </div>
-
-            <!-- Skill Categories -->
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Programming Languages -->
+
                 <div class="bg-[#fafaf9] rounded-2xl p-8 border border-stone-200/60 hover:border-[#D2B48C]/40 transition-all duration-300 fade-in">
                     <div class="w-12 h-12 bg-[#D2B48C]/10 rounded-xl flex items-center justify-center mb-6">
                         <i data-lucide="code-2" class="w-6 h-6 text-[#D2B48C]"></i>
@@ -333,7 +314,6 @@
                     </div>
                 </div>
 
-                <!-- Data Science & Analytics -->
                 <div class="bg-[#fafaf9] rounded-2xl p-8 border border-stone-200/60 hover:border-[#D2B48C]/40 transition-all duration-300 fade-in">
                     <div class="w-12 h-12 bg-[#D2B48C]/10 rounded-xl flex items-center justify-center mb-6">
                         <i data-lucide="bar-chart-3" class="w-6 h-6 text-[#D2B48C]"></i>
@@ -348,21 +328,19 @@
                     </div>
                 </div>
 
-                <!-- Web Development -->
-                <div class="bg-[#fafaf9] rounded-2xl p-.8 border border-stone-200/60 hover:border-[#D2B48C]/40 transition-all duration-300 fade-in">
+                <div class="bg-[#fafaf9] rounded-2xl p-8 border border-stone-200/60 hover:border-[#D2B48C]/40 transition-all duration-300 fade-in">
                     <div class="w-12 h-12 bg-[#D2B48C]/10 rounded-xl flex items-center justify-center mb-6">
-                        <i data-lucide="globe" class="w-6 h-6 text-[#D2B48C]"></*i>
+                        <i data-lucide="globe" class="w-6 h-6 text-[#D2B48C]"></i>
                     </div>
                     <h3 class="text-lg font-semibold mb-4">Web Development</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-white border border-stone-200 text-stone-700 text-sm px-4 py?2 rounded-lg font-medium">HTML5</span>
-                        <span class="bg-white border border-stone-200 text-stone-700 text-sm px-4 py-2 roundedAtr-lg font-medium">CSS3</span>
+                        <span class="bg-white border border-stone-200 text-stone-700 text-sm px-4 py-2 rounded-lg font-medium">HTML5</span>
+                        <span class="bg-white border border-stone-200 text-stone-700 text-sm px-4 py-2 rounded-lg font-medium">CSS3</span>
                         <span class="bg-white border border-stone-200 text-stone-700 text-sm px-4 py-2 rounded-lg font-medium">Bootstrap</span>
                         <span class="bg-[#D2B48C]/10 border border-[#D2B48C]/30 text-[#b45309] text-sm px-4 py-2 rounded-lg font-medium">React.js</span>
                     </div>
                 </div>
 
-                <!-- Database -->
                 <div class="bg-[#fafaf9] rounded-2xl p-8 border border-stone-200/60 hover:border-[#D2B48C]/40 transition-all duration-300 fade-in">
                     <div class="w-12 h-12 bg-[#D2B48C]/10 rounded-xl flex items-center justify-center mb-6">
                         <i data-lucide="database" class="w-6 h-6 text-[#D2B48C]"></i>
@@ -373,27 +351,24 @@
                         <span class="bg-white border border-stone-200 text-stone-700 text-sm px-4 py-2 rounded-lg font-medium">MySQL</span>
                         <span class="bg-[#D2B48C]/10 border border-[#D2B48C]/30 text-[#b45309] text-sm px-4 py-2 rounded-lg font-medium">MongoDB</span>
                     </div>
-               B                </div>
+                </div>
 
-6
-                <!--& Tools & Software -->
-                <div class="bg-[#fafaf=9] rounded-2xl p-8 border border-stone-200/60 hover:border-[#D2B48C2C]/40 transition-all duration-300 fade-in">
+                <div class="bg-[#fafaf9] rounded-2xl p-8 border border-stone-200/60 hover:border-[#D2B48C]/40 transition-all duration-300 fade-in">
                     <div class="w-12 h-12 bg-[#D2B48C]/10 rounded-xl flex items-center justify-center mb-6">
                         <i data-lucide="wrench" class="w-6 h-6 text-[#D2B48C]"></i>
                     </div>
                     <h3 class="text-lg font-semibold mb-4">Tools & Software</h3>
                     <div class="flex flex-wrap gap-2">
-                        <span class="bg-white border border-stone-200 text-stone-700 text-sm px-4 py-2 rounded-lg font-medium">Git &, </span>
+                        <span class="bg-white border border-stone-200 text-stone-700 text-sm px-4 py-2 rounded-lg font-medium">Git</span>
                         <span class="bg-white border border-stone-200 text-stone-700 text-sm px-4 py-2 rounded-lg font-medium">GitHub</span>
-                       E                        <span class="bg-white border border-stone-200 text-stone-700 text-sm px-4 py-2 rounded-lg font-medium">VS Code</span>
-                        <span class="bg-white border border-stone-200 text4-stone-700 text-sm px-4 py-2 rounded-lg font-medium">Jupyter</span>
+                        <span class="bg-white border border-stone-200 text-stone-700 text-sm px-4 py-2 rounded-lg font-medium">VS Code</span>
+                        <span class="bg-white border border-stone-200 text-stone-700 text-sm px-4 py-2 rounded-lg font-medium">Jupyter</span>
                         <span class="bg-white border border-stone-200 text-stone-700 text-sm px-4 py-2 rounded-lg font-medium">Power BI</span>
                     </div>
                 </div>
 
-                <!-- Soft Skills & Office -->
                 <div class="bg-[#fafaf9] rounded-2xl p-8 border border-stone-200/60 hover:border-[#D2B48C]/40 transition-all duration-300 fade-in">
-                    <div class="w-12 hBh-12 bg-[#D2B48C]/10 rounded-xl flex items-center justify-center mb-6">
+                    <div class="w-12 h-12 bg-[#D2B48C]/10 rounded-xl flex items-center justify-center mb-6">
                         <i data-lucide="users" class="w-6 h-6 text-[#D2B48C]"></i>
                     </div>
                     <h3 class="text-lg font-semibold mb-4">Office & Soft Skills</h3>
@@ -405,11 +380,12 @@
                         <span class="bg-[#D2B48C]/10 border border-[#D2B48C]/30 text-[#b45309] text-sm px-4 py-2 rounded-lg font-medium">Problem Solving</span>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Projects -->
     <section id="projects" class="py-24 bg-[#1e293b]">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
@@ -417,17 +393,17 @@
                 <h2 class="text-4xl font-serif tracking-tight mt-3 text-white">Featured <span class="text-[#D2B48C]">Projects</span></h2>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Main Project -->
-                <div class="project-card md:col-span-2 lg:col-span-2 bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white3white/10 hover:border-[#D2B48C]/40 transition-all duration-300 fade-in">
+
+                <div class="project-card md:col-span-2 lg:col-span-2 bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-[#D2B48C]/40 transition-all duration-300 fade-in">
                     <div class="grid md:grid-cols-2">
                         <div class="overflow-hidden">
-                            <img src="https://picsum.photos/seed/education-data/600/400.jpg" alt="Education Dataset Analysis" class<="project-img w-full h-64 md:h-full object-cover transition-transform duration-700">
+                            <img src="https://picsum.photos/seed/education-data/600/400.jpg" alt="Education Dataset Analysis" class="project-img w-full h-64 md:h-full object-cover transition-transform duration-700">
                         </div>
                         <div class="p-8 flex flex-col justify-center">
-                            <span class="text-[#D2B48C] text-xs font-semibold tracking-widest uppercase">Data Science • Python</span>
+                            <span class="text-[#D2B48C] text-xs font-semibold tracking-widest uppercase">Data Science</span>
                             <h3 class="text-2xl font-semibold text-white mt-3 mb-4">Education Dataset Analysis Using Python</h3>
                             <p class="text-stone-400 font-light leading-relaxed mb-6">
-                                Performed exploratory data analysis (EDA) on an education dataset using Python libraries — Pandas, NumPy, and Matplotlib. Identified trends, handled missing data, and created visualizations for insights.
+                                Performed exploratory data analysis (EDA) on an education dataset using Python libraries. Identified trends, handled missing data, and created visualizations for insights.
                             </p>
                             <div class="flex flex-wrap gap-2 mb-6">
                                 <span class="bg-white/10 text-stone-300 text-xs px-3 py-1 rounded-full">Python</span>
@@ -436,27 +412,18 @@
                                 <span class="bg-white/10 text-stone-300 text-xs px-3 py-1 rounded-full">EDA</span>
                             </div>
                             <div class="flex gap-4">
-                                <a href="#" class="inline-flex items-center gap-2 text-[#D2B48C] text-sm font-medium hover:text-white transition-colors">
-                                    <i data-lucide="github" class="w-4 h-4"></i> Code
-                                </a>
-                                <a href="#" class="inline-flex items-center gap-2 text-[#D2B48C] text-sm font-medium hover:text-white transition-colors">
-                                    <i data-lucide="external-link" class="w-4 h-4"></i> Demo
-                                </a>
+                                <a href="#" class="inline-flex items-center gap-2 text-[#D2B48C] text-sm font-medium hover:text-white transition-colors"><i data-lucide="github" class="w-4 h-4"></i> Code</a>
+                                <a href="#" class="inline-flex items-center gap-2 text-[#D2B48C] text-sm font-medium hover:text-white transition-colors"><i data-lucide="external-link" class="w-4 h-4"></i> Demo</a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Upcoming Project Card 1 -->
                 <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-[#D2B48C]/40 transition-all duration-300 flex flex-col justify-between fade-in">
                     <div>
-                        <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center mb-6">
-                            <i data-lucide="layout" class="w-5 h-5 text-[#D2B48C]"></i>
-                        </div>
+                        <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center mb-6"><i data-lucide="layout" class="w-5 h-5 text-[#D2B48C]"></i></div>
                         <h3 class="text-xl font-semibold text-white mb-3">Portfolio Website</h3>
-                        <p class="text-stone-400 font-light leading-relaxed text-sm">
-                            Building a responsive personal portfolio using HTML, CSS, JavaScript & modern design principles.
-                        </p>
+                        <p class="text-stone-400 font-light leading-relaxed text-sm">Building a responsive personal portfolio using HTML, CSS, JavaScript and modern design principles.</p>
                     </div>
                     <div class="flex flex-wrap gap-2 mt-6">
                         <span class="bg-white/10 text-stone-300 text-xs px-3 py-1 rounded-full">HTML/CSS</span>
@@ -464,16 +431,11 @@
                     </div>
                 </div>
 
-                <!-- Upcoming Project Card 2 -->
                 <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-[#D2B48C]/40 transition-all duration-300 flex flex-col justify-between fade-in">
                     <div>
-                        <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center mb-6">
-                            <i data-lucide="brain" class="w-5 h-5 text-[#D2B48C]"></i>
-                        </div>
+                        <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center mb-6"><i data-lucide="brain" class="w-5 h-5 text-[#D2B48C]"></i></div>
                         <h3 class="text-xl font-semibold text-white mb-3">ML Model Project</h3>
-                        <p class="text-stone-400 font-light leading-relaxed text-sm">
-                            Planning to build a machine learning classification/ regression model as part of MCA coursework.
-                        </p>
+                        <p class="text-stone-400 font-light leading-relaxed text-sm">Planning to build a machine learning model as part of MCA coursework.</p>
                     </div>
                     <div class="flex flex-wrap gap-2 mt-6">
                         <span class="bg-white/10 text-stone-300 text-xs px-3 py-1 rounded-full">Scikit-learn</span>
@@ -481,17 +443,12 @@
                     </div>
                 </div>
 
-                <!-- Upcoming Project Card 3 -->
                 <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-[#D2B48C]/40 transition-all duration-300 flex flex-col justify-between md:col-span-2 lg:col-span-2 fade-in">
                     <div class="flex flex-col md:flex-row md:items-start gap-6">
-                        <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center shrink-0">
-                            <i data-lucide="server" class="w-5 h-5 text-[#D2B48C]"></i>
-                        </div>
+                        <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center shrink-0"><i data-lucide="server" class="w-5 h-5 text-[#D2B48C]"></i></div>
                         <div>
                             <h3 class="text-xl font-semibold text-white mb-3">Full-Stack Web Application</h3>
-                            <p class="text-stone-400 font-light leading-relaxed text-sm">
-                                Upcoming MCA project — a complete full-stack application with React frontend, Node.js/Flask backend, and database integration.
-                            </p>
+                            <p class="text-stone-400 font-light leading-relaxed text-sm">Upcoming MCA project: a complete full-stack application with React frontend, Node.js backend, and database integration.</p>
                             <div class="flex flex-wrap gap-2 mt-4">
                                 <span class="bg-white/10 text-stone-300 text-xs px-3 py-1 rounded-full">React</span>
                                 <span class="bg-white/10 text-stone-300 text-xs px-3 py-1 rounded-full">Node.js</span>
@@ -501,12 +458,13 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Internship Section -->
-    <section id="internship" class="py-24 bg-[=#[#fafaf9]">
+    <!-- Internship -->
+    <section id="internship" class="py-24 bg-[#fafaf9]">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
                 <p class="text-[#b45309] text-sm font-medium tracking-widest uppercase">Experience</p>
@@ -514,7 +472,7 @@
             </div>
             <div class="max-w-3xl mx-auto">
                 <div class="bg-white rounded-2xl p-10 card-shadow border border-stone-100 fade-in">
-                    <div class="flex items-start gap-6">
+                    <div class="flex flex-col sm:flex-row items-start gap-6">
                         <div class="w-16 h-16 bg-[#D2B48C]/10 rounded-2xl flex items-center justify-center shrink-0">
                             <i data-lucide="briefcase" class="w-8 h-8 text-[#D2B48C]"></i>
                         </div>
@@ -524,8 +482,8 @@
                                 <span class="bg-[#D2B48C]/10 text-[#b45309] text-xs font-semibold px-4 py-1.5 rounded-full">Completed</span>
                             </div>
                             <p class="text-stone-500 text-sm mb-4">1 Month Internship</p>
-                            <p class="text-stone-600 font#light leading-relaxed">
-                               F                                Gained09;gained hands-on experience in data science fundamentals using Python. Worked with libraries like Pandas and NumPy for data manipulation, Matplotlib & Seaborn for data visualization, and learned exploratory data analysis (EDA) techniques on real-world datasets.
+                            <p class="text-stone-600 font-light leading-relaxed">
+                                Gained hands-on experience in data science fundamentals using Python. Worked with Pandas and NumPy for data manipulation, Matplotlib and Seaborn for visualization, and learned EDA techniques on real-world datasets.
                             </p>
                             <div class="flex flex-wrap gap-2 mt-6">
                                 <span class="bg-[#fafaf9] border border-stone-200 text-stone-700 text-sm px-4 py-2 rounded-lg font-medium">Python</span>
@@ -540,64 +498,38 @@
         </div>
     </section>
 
-    <!-- Personal Info & Resume Download -->
+    <!-- Personal Info & Resume -->
     <section class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-16">
-                <!-- Personal Information -->
+
                 <div class="fade-in">
                     <p class="text-[#b45309] text-sm font-medium tracking-widest uppercase">Personal Details</p>
                     <h2 class="text-3xl font-serif tracking-tight mt-3 mb-8">About <span class="text-[#D2B48C]">Me</span></h2>
                     <div class="space-y-5">
                         <div class="flex items-center gap-4 p-4 bg-[#fafaf9] rounded-xl">
-                            <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center shrink-0">
-                                <i data-lucide="user" class="w-5 h-5 text-[#D2B48C]"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-stone-400 font-medium uppercase tracking-wider">Father's Name</p>
-                                <p class="text-stone-700 font-medium">Bishnu Rajak</p>
-                            </div>
+                            <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center shrink-0"><i data-lucide="user" class="w-5 h-5 text-[#D2B48C]"></i></div>
+                            <div><p class="text-xs text-stone-400 font-medium uppercase tracking-wider">Father's Name</p><p class="text-stone-700 font-medium">Bishnu Rajak</p></div>
                         </div>
                         <div class="flex items-center gap-4 p-4 bg-[#fafaf9] rounded-xl">
-                            <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center shrink-0">
-                                <i data-lucide="cake" class="w-5 h-5 text-[#D2B48C]"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-stone-400 font-medium uppercase tracking-wider">Date of Birth</p>
-                                <p class="text-stone-700 font-medium">10 January 2003</p>
-                            </div>
+                            <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center shrink-0"><i data-lucide="cake" class="w-5 h-5 text-[#D2B48C]"></i></div>
+                            <div><p class="text-xs text-stone-400 font-medium uppercase tracking-wider">Date of Birth</p><p class="text-stone-700 font-medium">10 January 2003</p></div>
                         </div>
                         <div class="flex items-center gap-4 p-4 bg-[#fafaf9] rounded-xl">
-                            <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center shrink-0">
-                                <i data-lucide="languages" class="w-5 h-5 text-[#D2B48C]"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-stone-400 font-medium uppercase tracking-wider">Languages Known</p>
-                                <p class="text-stone-700 font-medium">Hindi & English</p>
-                            </div>
+                            <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center shrink-0"><i data-lucide="languages" class="w-5 h-5 text-[#D2B48C]"></i></div>
+                            <div><p class="text-xs text-stone-400 font-medium uppercase tracking-wider">Languages Known</p><p class="text-stone-700 font-medium">Hindi and English</p></div>
                         </div>
                         <div class="flex items-center gap-4 p-4 bg-[#fafaf9] rounded-xl">
-                            <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center shrink-0">
-                                <i data-lucide="heart" class="w-5 h-5 text-[#D2B48C]"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-stone-400 font-medium uppercase tracking-wider">Gender / Status</p>
-                                <p class="text-stone-700 font-medium">Female • Unmarried</p>
-                            </div>
+                            <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center shrink-0"><i data-lucide="heart" class="w-5 h-5 text-[#D2B48C]"></i></div>
+                            <div><p class="text-xs text-stone-400 font-medium uppercase tracking-wider">Gender / Status</p><p class="text-stone-700 font-medium">Female &bull; Unmarried</p></div>
                         </div>
                         <div class="flex items-center gap-4 p-4 bg-[#fafaf9] rounded-xl">
-                            <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center shrink-0">
-                                <i data-lucide="flag" class="w-5 h-5 text-[#D2B48C]"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-stone-400 font-medium uppercase tracking-wider">Nationality</p>
-                                <p class="text-700 font-medium">Indian</p>
-                            </div>
+                            <div class="w-10 h-10 bg-[#D2B48C]/10 rounded-lg flex items-center justify-center shrink-0"><i data-lucide="flag" class="w-5 h-5 text-[#D2B48C]"></i></div>
+                            <div><p class="text-xs text-stone-400 font-medium uppercase tracking-wider">Nationality</p><p class="text-stone-700 font-medium">Indian</p></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Objective & CTA -->
                 <div class="fade-in flex flex-col justify-center">
                     <p class="text-[#b45309] text-sm font-medium tracking-widest uppercase">Career Objective</p>
                     <h2 class="text-3xl font-serif tracking-tight mt-3 mb-6">My <span class="text-[#D2B48C]">Goal</span></h2>
@@ -611,55 +543,39 @@
                         </div>
                         <p class="text-stone-400 text-sm font-light mb-6">Get a complete overview of my qualifications, skills, and experience.</p>
                         <button onclick="downloadResume()" class="inline-flex items-center gap-2 bg-[#D2B48C] text-stone-900 text-sm font-semibold px-8 py-4 rounded-lg hover:bg-[#C4A882] transition-colors w-full justify-center">
-                            <i data-lucide="file-down" class="w-4 h-4"></i> Download PDF
+                            <i data-lucide="file-down" class="w-4 h-4"></i> Download Resume
                         </button>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section id="contact" class="py-24 bg-[#1c1917]">
-        <div class="max-w<:-7xl mx-auto px-6">
+        <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-16">
                 <div>
                     <p class="text-[#D2B48C] text-sm font-medium tracking-widest uppercase">Get In Touch</p>
                     <h2 class="text-4xl font-serif tracking-tight mt-3 text-white">Let's <span class="text-[#D2B48C]">Connect</span></h2>
-                    <p class="text-stone-400 font-light leading-relaxed mt-6 text-lg">
-                        I'm open to internship3internship opportunities, freelance projects, or full-time roles. Feel free to reach out!
-                    </p>
+                    <p class="text-stone-400 font-light leading-relaxed mt-6 text-lg">I'm open to internship opportunities, freelance projects, or full-time roles. Feel free to reach out!</p>
                     <div class="space-y-6 mt-10">
                         <a href="mailto:laxmikumarirajak402@gmail.com" class="flex items-center gap-4 group">
-                            <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center group-hover:bg-[#D2B48C]/10 transition-colors">
-                                <i data-lucide="mail" class="w-5 h-5 text-[#D2B48C]"></i>
-                            </div>
-                            <div>
-                                <p class="text-stone-400 text-sm">Email</p>
-                                <p class="text-white font-medium group-hover:text-[#D2B48C] transition-colors">laxmikumarirajak402@gmail.com</p>
-                            </div>
+                            <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center group-hover:bg-[#D2B48C]/10 transition-colors"><i data-lucide="mail" class="w-5 h-5 text-[#D2B48C]"></i></div>
+                            <div><p class="text-stone-400 text-sm">Email</p><p class="text-white font-medium group-hover:text-[#D2B48C] transition-colors">laxmikumarirajak402@gmail.com</p></div>
                         </a>
                         <a href="tel:+919263955418" class="flex items-center gap-4 group">
-                            <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center group-hover:bg-[#D2B48C]/10 transition-colors">
-                                <i data-lucide="phone" class="w-5 h-5 text-[#D2B48C]"></i>
-                            </div>
-                            <div>
-                                <p class="text-stone-400 text-sm">Phone</p>
-                                <p class="text-white font-medium group-hover:text-[#D2B48C] transition-colors">+91 9263955418</p>
-                            </div>
+                            <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center group-hover:bg-[#D2B48C]/10 transition-colors"><i data-lucide="phone" class="w-5 h-5 text-[#D2B48C]"></i></div>
+                            <div><p class="text-stone-400 text-sm">Phone</p><p class="text-white font-medium group-hover:text-[#D2B48C] transition-colors">+91 9263955418</p></div>
                         </a>
                         <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center">
-                                <i data-lucide="map-pin" class="w-5 h-5 text-[#D2B48C]"></i>
-                            </div>
-                            <div>
-                                <p class="text-stone-400 text-sm">Location</p>
-                                <p class="text-white font-medium">Silli, Chhatatand, Ranchi, Jharkhand - 835102</p>
-                            </div>
+                            <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center"><i data-lucide="map-pin" class="w-5 h-5 text-[#D2B48C]"></i></div>
+                            <div><p class="text-stone-400 text-sm">Location</p><p class="text-white font-medium">Silli, Chhatatand, Ranchi, Jharkhand - 835102</p></div>
                         </div>
                     </div>
                 </div>
-B                <div>
+                <div>
                     <form id="contactForm" class="space-y-6">
                         <div>
                             <label class="text-stone-400 text-sm font-medium mb-2 block">Your Name</label>
@@ -671,14 +587,14 @@ B                <div>
                         </div>
                         <div>
                             <label class="text-stone-400 text-sm font-medium mb-2 block">Message</label>
-                            <textarea rows="5" required class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-stone-500 focus:border-[#D2B48C] focus:" ring-1 focus:ring-[#D2B48C] transition-colors outline-none resize-none" placeholder="Write your message..."></textarea>
+                            <textarea rows="5" required class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-stone-500 focus:border-[#D2B48C] focus:ring-1 focus:ring-[#D2B48C] transition-colors outline-none resize-none" placeholder="Write your message..."></textarea>
                         </div>
                         <button type="submit" class="w-full bg-[#D2B48C] text-stone-900 text-sm font-semibold px-8 py-4 rounded-lg hover:bg-[#C4A882] transition-colors flex items-center justify-center gap-2">
                             Send Message <i data-lucide="send" class="w-4 h-4"></i>
                         </button>
                     </form>
                     <div id="formSuccess" class="hidden mt-4 bg-green-500/10 border border-green-500/30 rounded-xl p-4 text-green-400 text-sm font-medium flex items-center gap-2">
-                        <i data-lucide="check-circle" class="w-5 h-5"></i> Message sent successfully! I'll get back to you soon.
+                        <i data-lucide="check-circle" class="w-5 h-5"></i> Message sent successfully! I will get back to you soon.
                     </div>
                 </div>
             </div>
@@ -689,203 +605,104 @@ B                <div>
     <footer class="bg-[#1c1917] border-t border-white/5 py-12">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="flex items-center gap-3">
-                    <span class="font-serif text-xl font-semibold text-white">Laxmi<span class="text-[#D2B48C]">.</span></span>
-                </div>
+                <span class="font-serif text-xl font-semibold text-white">Laxmi<span class="text-[#D2B48C]">.</span></span>
                 <div class="flex items-center gap-6">
-                    <a href="mailto:laxmikumarirajak402@gmail.com" class="text-stone-400 hover:text-[#D2B48C] transition-colors">
-                        <i data-lucide="mail" class="w-5 h-5"></i>
-                    </a>
-                    <a href="tel:+919263955418" class="text-stone-400 hover:text-[#D2B48C] transition-colors">
-                        <i data-lucide="phone" class="w-5 h-5"></i>
-                    </a>
-                    <a href="#" class="text-stone-400 hover:text-[#D2B48C] transition-colors">
-                        <i data-lucide="github" class="w-5 h-5"></i>
-                    </a>
-                    <a href="#" class="text-stone-400 hover:text-[#D2B48C] transition-colors">
-                        <i data-lucide="linkedin" class="w-5 h-5"></i>
-                    </a>
+                    <a href="mailto:laxmikumarirajak402@gmail.com" class="text-stone-400 hover:text-[#D2B48C] transition-colors"><i data-lucide="mail" class="w-5 h-5"></i></a>
+                    <a href="tel:+919263955418" class="text-stone-400 hover:text-[#D2B48C] transition-colors"><i data-lucide="phone" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-stone-400 hover:text-[#D2B48C] transition-colors"><i data-lucide="github" class="w-5 h-5"></i></a>
+                    <a href="#" class="text-stone-400 hover:text-[#D2B48C] transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
                 </div>
                 <p class="text-stone-500 text-sm">&copy; 2025 Laxmi Kumari Rajak. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Toast Notification -->
+    <!-- Toast -->
     <div id="toast" class="fixed bottom-6 right-6 bg-stone-900 text-white px-6 py-4 rounded-xl shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-3">
         <i data-lucide="check-circle" class="w-5 h-5 text-[#D2B48C]"></i>
-        <span id="toastText">Action completed!</span>
+        <span id="toastText">Done!</span>
     </div>
 
     <script>
-        // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        // Mobile menu
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
         });
-        // Close mobile menu on link click
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('shadow-sm');
-            } else {
-                navbar.classList.remove('shadow-s!m');
-            }
+        document.querySelectorAll('#mobileMenu a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileMenu').classList.add('hidden');
+            });
         });
 
-        // Scroll-triggered fade-in animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+        // Navbar shadow
+        window.addEventListener('scroll', function() {
+            var nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('shadow-sm');
+            else nav.classList.remove('shadow-sm');
+        });
+
+        // Fade in
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
 
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        // Typewriter effect for hero
-        const roles = ['MCA Student', 'Data Science Enthusiast', 'Python Developer', 'Aspiring Full-Stack Dev'];
-        let roleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typedText = document.getElementById('typedText');
-
+        // Typewriter
+        var roles = ['MCA Student', 'Data Science Enthusiast', 'Python Developer', 'Aspiring Full-Stack Dev'];
+        var roleIndex = 0, charIndex = 0, isDeleting = false;
+        var typedEl = document.getElementById('typedText');
         function typeWriter() {
-            const current = roles[roleIndex];
-            if (isDeleting) {
-                typedText.textContent = current.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typedText.textContent = current.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let speed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === current.length) {
-                speed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-                speed = 500;
-            }
-
+            var current = roles[roleIndex];
+            if (isDeleting) { typedEl.textContent = current.substring(0, charIndex - 1); charIndex--; }
+            else { typedEl.textContent = current.substring(0, charIndex + 1); charIndex++; }
+            var speed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIndex === current.length) { speed = 2000; isDeleting = true; }
+            else if (isDeleting && charIndex === 0) { isDeleting = false; roleIndex = (roleIndex + 1) % roles.length; speed = 500; }
             setTimeout(typeWriter, speed);
         }
         setTimeout(typeWriter, 2000);
 
-        // Toast notification
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const toastText = document.getElementById('toastText');
-            toastText.textContent = message;
-            toast.classList'.'classList.remove('translate-y-20', 'opacity-0');
-            toast.classList.add('translate-y-0', 'opacity-100');
-            setTimeout(() => {
-                toast.classList.remove('translate-y-0', 'opacity-100');
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
+        // Toast
+        function showToast(msg) {
+            var t = document.getElementById('toast');
+            document.getElementById('toastText').textContent = msg;
+            t.classList.remove('translate-y-20', 'opacity-0');
+            t.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(function() { t.classList.remove('translate-y-0', 'opacity-100'); t.classList.add('translate-y-20', 'opacity-0'); }, 3000);
         }
 
-        // Contact Form
+        // Contact form
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             document.getElementById('formSuccess').classList.remove('hidden');
             this.reset();
             showToast('Message sent successfully!');
-            setTimeout(() => {
-                document.getElementById('formSuccess').classList.add('hidden');
-            }, 5000);
+            var self = this;
+            setTimeout(function() { document.getElementById('formSuccess').classList.add('hidden'); }, 5000);
         });
 
-        // Download Resume (generates a simple text resume)
+        // Download resume
         function downloadResume() {
-            const resumeContent = `
-╔══════════════════════════════════════════════╗
-║                    RESUME                     ║
-║          LAXMI KUMARI RAJAK                   ║
-╚══════════════════════════════════════════════╝
-
-ADDRESS: Silli, Chhatatand, Ranchi, Jharkhand - 835102
-MO: 9263955418
-EMAIL: laxmikumarirajak402@gmail.com
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-CAREER OBJECTIVE
-My goal is to secure a challenging role in a prestigious
-firm, enabling me to make meaningful contributions while
-continuously learning and enhancing my skills, fostering
-substantial professional growth.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-ACADEMIC QUALIFICATION
-┌────┬──────────────────────┬─────────────────────┬──────┬────────┐
-│ S.No│ Qualification        │ University/Board    │ Year │  Per % │
-├────┼──────────────────────┼─────────────────────┼──────┼────────┤
-│ 1   │ MCA                  │ Sarala Birla Univ.  │ 2027 │ 7.39   │
-│ 2   │ BSc (Zoology)        │ Ranchi University   │ 2024 │ 70.22% │
-│ 3   │ 12th                 │ JAC, Ranchi         │ 2021 │ 54.4%  │
-│ 4   │ 10th                 │ JAC, Ranchi         │ 2019 │ 73.20% │
-└────┴──────────────────────┴─────────────────────┴──────┴────────┘
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-SKILLS
-• Programming: Python, C, C++, Java, JavaScript
-• Data Science: Pandas, NumPy, Matplotlib, Scikit-learn, EDA
-• Web Dev: HTML5, CSS3, Bootstrap, React.js
-• Database: SQL, MySQL, MongoDB
-• Tools: Git, GitHub, VS Code, Jupyter, Power BI
-• Office: MS Word, Excel, PowerPoint
-• Soft Skills: Communication, Problem Solving
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-PROJECTS
-• Education Dataset Analysis Using Python
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-INTERNSHIP
-Completed 1 month internship as Data Science With Python
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-PERSONAL INFORMATION
-Father's Name  : Bishnu Rajak
-Date of Birth  : 10 January 2003
-Language Known : Hindi & English
-Gender         : Female
-Nationality    : Indian
-Marital Status : Unmarried
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-DECLARATION
-I hereby declare that the above information given by me
-is true to the best of my knowledge.
-
-Date:
-Place: Ranchi, Jharkhand
-
-                        (Laxmi Kumari Rajak)
-`;
-            const blob = new Blob([resumeContent], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
+            var c = 'RESUME - LAXMI KUMARI RAJAK\n';
+            c += 'Silli, Chhatatand, Ranchi, Jharkhand - 835102\n';
+            c += 'Mob: 9263955418 | Email: laxmikumarirajak402@gmail.com\n\n';
+            c += 'CAREER OBJECTIVE\nMy goal is to secure a challenging role in a prestigious firm, enabling me to make meaningful contributions while continuously learning and enhancing my skills.\n\n';
+            c += 'ACADEMIC QUALIFICATION\n';
+            c += '1. MCA - Sarala Birla University - 2027 (7.39 SGPA)\n';
+            c += '2. BSc (Zoology) - Ranchi University - 2024 (70.22%)\n';
+            c += '3. 12th - Jharkhand Academic Council - 2021 (54.4%)\n';
+            c += '4. 10th - Jharkhand Academic Council - 2019 (73.20%)\n\n';
+            c += 'SKILLS\nProgramming: Python, C, C++, Java, JavaScript\nData Science: Pandas, NumPy, Matplotlib, Scikit-learn, EDA\nWeb Dev: HTML5, CSS3, Bootstrap, React.js\nDatabase: SQL, MySQL, MongoDB\nTools: Git, GitHub, VS Code, Jupyter, Power BI\nOffice: MS Word, Excel, PowerPoint\nSoft Skills: Communication, Problem Solving\n\n';
+            c += 'PROJECTS\nEducation Dataset Analysis Using Python\n\n';
+            c += 'INTERNSHIP\nCompleted 1 month internship as Data Science With Python\n\n';
+            c += "PERSONAL INFORMATION\nFather's Name: Bishnu Rajak\nDOB: 10 January 2003\nLanguages: Hindi & English\nGender: Female | Nationality: Indian | Status: Unmarried";
+            var blob = new Blob([c], { type: 'text/plain' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
             a.href = url;
             a.download = 'Resume_Laxmi_Kumari_Rajak.txt';
             a.click();
@@ -893,23 +710,14 @@ Place: Ranchi, Jharkhand
             showToast('Resume downloaded!');
         }
 
-        // Active nav link highlighting
-        const sections = document.querySelectorAll('section[id]');
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                if (window.scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('text-stone-900');
-                link.classList.add('text-stone-600');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.remove('text-stone-600');
-                    link.classList.add('text-stone-900');
-                }
+        // Active nav
+        var sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', function() {
+            var current = '';
+            sections.forEach(function(s) { if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id'); });
+            document.querySelectorAll('.nav-link').forEach(function(link) {
+                link.classList.remove('active-link');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active-link');
             });
         });
     </script>
